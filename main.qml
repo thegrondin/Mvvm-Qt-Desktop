@@ -18,6 +18,12 @@ Window {
         font.pixelSize: 12
     }
 
+    Binding {
+        target: model
+        property: "firstname"
+        value: textInput.text
+    }
+
     TextInput {
         id: textInput2
         x: 116
@@ -28,16 +34,27 @@ Window {
         font.pixelSize: 12
     }
 
-    TextInput {
-        id: textInput3
+    Binding {
+        target: model
+        property: "lastname"
+        value: textInput2.text
+    }
+
+    SpinBox  {
+        id: spinBox1
         x: 116
         y: 130
         width: 80
         height: 20
-        text: model.age
+        value: model.age
         font.pixelSize: 12
     }
 
+    Binding {
+        target: model
+        property: "age"
+        value: spinBox1.value
+    }
 
     Button {
         x: 244

@@ -34,7 +34,7 @@ public:
         lastname = value;
     }
 
-    void SetAge(const int value) {
+    void SetAge(const int& value) {
         age = value;
     }
 };

@@ -3,6 +3,10 @@
 #include <QObject>
 #include <iostream>
 #include "customermodel.h"
+#include <QMessageBox>
+#include <sstream>
+#include <iostream>
+#include <string>
 
 class MainViewModel: public QObject
 {
@@ -39,7 +43,7 @@ public slots:
             LastnameChanged(arg);
         }
     }
-    void SetAge(int arg) {
+    void SetAge(int& arg) {
         if (customerModel_.GetAge() != arg) {
             customerModel_.SetAge(arg);
             AgeChanged(arg);
@@ -47,13 +51,23 @@ public slots:
     }
     Q_INVOKABLE void executeBtn() // clear command
     {
-        //std::cout << "Customer name is : " << customerModel_.GetFirstname().toUtf8().constData();
+
+        std::stringstream output;
+
+        output << "Customer informations:" << std::endl << std::endl;
+        output << "Firstname: " << GetFirstname().toUtf8().constData() << std::endl;
+        output << "Lastname: " << GetLastname().toUtf8().constData() << std::endl;
+        output << "Age: " << GetAge() << std::endl;
+
+        QMessageBox msgBox;
+        msgBox.setText(QString::fromStdString(output.str()));
+        msgBox.exec();
     }
 
 signals:
     void FirstnameChanged(QString& arg);
     void LastnameChanged(QString& arg);
-    void AgeChanged(int arg);
+    void AgeChanged(int& arg);
 };
 
 #endif // MAINVIEWMODEL_H
